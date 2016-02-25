@@ -56,7 +56,7 @@
         {
             friendname = [friendname stringByAppendingString:Userpostfix];
         }
-  [[[SSConnectionClasses shareInstance] xmppRoster] addUser:[XMPPJID jidWithString:friendname] withNickname:friendname];
+        [[[SSConnectionClasses shareInstance] xmppRoster] addUser:[XMPPJID jidWithString:friendname] withNickname:friendname];
         
     }
 

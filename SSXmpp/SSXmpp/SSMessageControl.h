@@ -17,13 +17,18 @@
 @interface SSMessageControl : NSObject<NSFetchedResultsControllerDelegate>
 
 @property (nonatomic,strong) NSFetchedResultsController*fetchedResultsController;
-@property(nonatomic, assign) id <SSMessageDelegate> delegate;
+@property (nonatomic, assign) id <SSMessageDelegate> delegate;
 @property (nonatomic,strong) NSString * otherjid;
+
+@property BOOL isInChat;
 
 +(SSMessageControl *)shareInstance;
 
 - (void)setSSMessageDelegate;
 - (void)sendMessage:(NSString *)messageString to:(NSString *)name;
+- (void)sentMessageInagroup:(NSString *)messageString to:(NSString *)name;
+
+
 - (void)fetchedObjectsController;
 
 - (void)sendActiveChatToUser;
@@ -32,6 +37,8 @@
 - (void)sendComposingChatToUser;
 - (void)sendPausedChatToUser;
 - (void)sendExitChatToUser;
+
+-(void)removeSSMessageDelegate;
 
 
 @end

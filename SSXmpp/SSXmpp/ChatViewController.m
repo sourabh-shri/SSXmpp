@@ -12,6 +12,7 @@
 @interface ChatCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewUser;
 @property (weak, nonatomic) IBOutlet UILabel *labelMessage;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewMessageStatus;
 @end
 @implementation ChatCell
 @end
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelChatStatus;
 @property (weak, nonatomic) IBOutlet UITableView *tableViewChat;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldChat;
+@property (weak, nonatomic) IBOutlet UIButton *ButtonGroupMember;
 
 @end
 
@@ -34,7 +36,7 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -50,6 +52,7 @@
     [super viewWillDisappear:animated];
     [SSMessageControl shareInstance].delegate=nil;
     [[SSMessageControl shareInstance] sendInactiveChatToUser];
+    [[SSMessageControl shareInstance] removeSSMessageDelegate];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -71,7 +74,24 @@
         [cell.contentView setBackgroundColor:[UIColor lightGrayColor]];
 
     }
+
+    NSString *receaptStatus = [[tableArray objectAtIndex:indexPath.row] valueForKey:@"recieptStatus"];
+    
+    if([receaptStatus isEqualToString:@"request"])
+    {
+        cell.imageViewMessageStatus.image = [UIImage imageNamed:@"request_tik"];
+    }
+    else if ([receaptStatus isEqualToString:@"received"])
+    {
+        cell.imageViewMessageStatus.image = [UIImage imageNamed:@"received_tik"];
+    }
+    else
+    {
+        cell.imageViewMessageStatus.image = [UIImage imageNamed:@"wait_tik"];
+    }
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     return cell;
 }
 
@@ -102,17 +122,19 @@
     }
 }
 
-
+- (IBAction)actionOnGroupMember:(id)sender
+{
+    [self performSegueWithIdentifier:@"GroupMembersViewController" sender:nil];
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [[SSMessageControl shareInstance] sendComposingChatToUser];
+   // [[SSMessageControl shareInstance] sendComposingChatToUser];
 }
-
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [[SSMessageControl shareInstance] sendPausedChatToUser];
+  //  [[SSMessageControl shareInstance] sendPausedChatToUser];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -120,7 +142,8 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

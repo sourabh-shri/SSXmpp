@@ -637,6 +637,33 @@ static NSMutableSet *databaseFileNames;
     return result;
 }
 
+- (NSManagedObjectContext *)managedObjectContext2
+{
+    if (managedObjectContext)
+    {
+        return managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator)
+    {
+        XMPPLogVerbose(@"%@: Creating managedObjectContext", [self class]);
+        
+        if ([NSManagedObjectContext instancesRespondToSelector:@selector(initWithConcurrencyType:)])
+            managedObjectContext =
+            [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        else
+            managedObjectContext = [[NSManagedObjectContext alloc] init];
+        
+        managedObjectContext.persistentStoreCoordinator = coordinator;
+        managedObjectContext.undoManager = nil;
+        
+        [self didCreateManagedObjectContext];
+    }
+    
+    return managedObjectContext;
+}
+
 - (NSManagedObjectContext *)managedObjectContext
 {
 	// This is a private method.
@@ -654,11 +681,13 @@ static NSMutableSet *databaseFileNames;
 	// If you even comtemplate ignoring this warning,
 	// then you need to go read the documentation for core data,
 	// specifically the section entitled "Concurrency with Core Data".
-	// 
+	//
+    
 	NSAssert(dispatch_get_specific(storageQueueTag), @"Invoked on incorrect queue");
-	// 
-	// Do NOT remove the assert statment above!
+	//
+    // Do NOT remove the assert statment above!
 	// Read the comments above!
+	
 	// 
 	
 	if (managedObjectContext)

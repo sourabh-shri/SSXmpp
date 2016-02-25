@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Sourabh. All rights reserved.
 //
 
-#define HostName @"111.118.246.34"
+#define HostName @""
+//#define HostName @""
+
 #define HostPort 5222
 
 #define UserJid                             @"UserJid"
@@ -41,11 +43,13 @@
 #define kAddFriendSuccess                  @"User friend added successfully."
 #define kAddFriendFailled                  @"User friend request failed."
 
+#define kRoomCreatedSuccess                @"Room Created successfully."
+#define kRoomCreatedFailled                @"Room Createtion failed."
+
 
 #define SSResponce(Message,Status,data)     @{@"message":Message,@"status":Status,@"data":data}
 
 #define ShowAlert(Title,Message,Target) [[[UIAlertView alloc] initWithTitle:Title message:Message delegate:Target cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show]
-
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -69,6 +73,9 @@
 #import "XMPPLastActivity.h"
 #import "Reachability.h"
 #import "XMLReader.h"
+#import "XMPPRoomMemoryStorage.h"
+#import "XMPPRoomCoreDataStorage.h"
+#import "XMPPMUC.h"
 
 #import "SSXmppBlocks.h"
 #import "SSXmppCommonClass.h"

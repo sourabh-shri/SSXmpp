@@ -12,7 +12,11 @@
 @property (nonatomic, strong) NSString * mostRecentMessageBody;
 @property (nonatomic, strong) NSNumber * mostRecentMessageOutgoing;
 
+@property (nonatomic) int unreadcount;
+
 @property (nonatomic, strong) NSString * streamBareJidStr;
+
+
 
 /**
  * This method is called immediately before the object is inserted into the managedObjectContext.

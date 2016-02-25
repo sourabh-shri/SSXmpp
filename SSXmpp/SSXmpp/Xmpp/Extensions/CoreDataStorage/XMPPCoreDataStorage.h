@@ -104,6 +104,7 @@
  *
  * Default 500
 **/
+
 @property (readwrite) NSUInteger saveThreshold;
 
 /**
@@ -139,7 +140,7 @@
  * and configured to automatically merge changesets from other threads.
 **/
 @property (strong, readonly) NSManagedObjectContext *mainThreadManagedObjectContext;
-
+- (NSManagedObjectContext *)managedObjectContext2;
 /**
  * The Previous Database File is removed before creating a persistant store.
  *
@@ -154,6 +155,7 @@
  *
  * Default NO
 **/
+
 @property (readwrite) BOOL autoRecreateDatabaseFile;
 
 /**
@@ -162,6 +164,7 @@
  *
  * Default NO
 **/
+
 @property (readwrite) BOOL autoAllowExternalBinaryDataStorage;
 
 @end

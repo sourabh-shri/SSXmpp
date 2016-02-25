@@ -31,6 +31,11 @@
     else
     {
         XMPPvCardTemp *myvCardTempw = [[[SSConnectionClasses shareInstance] xmppvCardTempModule] myvCardTemp];
+        
+        if (ssblock)
+        {
+            ssblock(SSResponce(kSuccess,kSuccess,myvCardTempw.photo));
+        }
     }
 }
 

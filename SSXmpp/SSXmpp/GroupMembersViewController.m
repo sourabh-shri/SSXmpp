@@ -1,23 +1,22 @@
 //
-//  GroupTabController.m
+//  GroupMembersViewController.m
 //  SSXmpp
 //
-//  Created by CANOPUS16 on 19/10/15.
-//  Copyright (c) 2015 Sourabh. All rights reserved.
+//  Created by CANOPUS16 on 22/12/15.
+//  Copyright © 2015 Sourabh. All rights reserved.
 //
 
-#import "GroupTabController.h"
+#import "GroupMembersViewController.h"
 
-@interface GroupTabController ()
+@interface GroupMembersViewController ()
 
 @end
 
-@implementation GroupTabController
+@implementation GroupMembersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
 }
 
 - (void)didReceiveMemoryWarning {

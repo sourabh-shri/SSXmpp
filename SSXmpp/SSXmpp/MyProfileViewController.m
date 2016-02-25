@@ -20,8 +20,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[SSUserVcard shareInstance]getVcardOfUser:^(NSDictionary *result) {
-        
+    [[SSUserVcard shareInstance]getVcardOfUser:^(NSDictionary *result)
+    {
+        NSData *d = [result valueForKey:kData];
+        _imageViewPic.image = [UIImage imageWithData:d];
     }];
 }
 

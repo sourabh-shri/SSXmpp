@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SSXmpp/SSMessageControl.m"
-            timestampString = "471442665.474456"
+            filePath = "SSXmpp/SSOnlineOfflineFriends.m"
+            timestampString = "475401684.563343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-fetchedObjectsController"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-fetchedResultsControllerOnlineOfflineFriends"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SSXmpp/Xmpp/Extensions/XEP-0136/CoreDataStorage/XMPPMessageArchivingCoreDataStorage.m"
-            timestampString = "471442908.769471"
+            filePath = "SSXmpp/SSConnectionClasses.m"
+            timestampString = "477322194.43528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
-            landmarkName = "-archiveMessage:outgoing:xmppStream:"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-setupStream"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

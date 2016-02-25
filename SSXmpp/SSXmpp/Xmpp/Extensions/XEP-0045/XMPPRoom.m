@@ -3,6 +3,7 @@
 #import "XMPPIDTracker.h"
 #import "XMPPMessage+XEP0045.h"
 #import "XMPPLogging.h"
+#import "XMPPMUC.h"
 
 
 // Log levels: off, error, warn, info, verbose
@@ -1090,6 +1091,8 @@ enum XMPPRoomState
 		// Todo... Handle other types of messages.
 	}
 }
+
+
 
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message
 {

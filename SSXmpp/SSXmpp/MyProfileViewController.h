@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyProfileViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewPic;
 
 @end

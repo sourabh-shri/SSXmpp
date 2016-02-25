@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userOnline;
+@property (weak, nonatomic) IBOutlet UILabel *unReadCount;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewOFA;
 @property (weak, nonatomic) IBOutlet UILabel *lableDate;
 
@@ -73,6 +74,8 @@
     cell.userName.text = [[tableArray objectAtIndex:indexPath.row] valueForKey:@"displayName"];
     cell.userImage.image = [[tableArray objectAtIndex:indexPath.row] valueForKey:@"photo"];
     cell.userOnline.text = [[tableArray objectAtIndex:indexPath.row] valueForKey:@"mostRecentMessageBody"];
+    
+    cell.unReadCount.text = [[tableArray objectAtIndex:indexPath.row] valueForKey:@"unreadcount"];
      cell.lableDate.text = [NSString stringWithFormat:@"%@",[[tableArray objectAtIndex:indexPath.row] valueForKey:@"mostRecentMessageTimestamp"]];
     switch ([[[tableArray objectAtIndex:indexPath.row] valueForKey:@"sectionNum"] integerValue]) {
         case 0:
@@ -155,6 +158,8 @@
 //
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   
+    
     [self performSegueWithIdentifier:@"ChatViewController" sender:indexPath];
 }
 

@@ -31,6 +31,9 @@
 
 @property (nonatomic, strong) NSNumber * paused;   // Use isPaused
 @property (nonatomic, assign) BOOL isPaused;       // Convenience property
+@property (nonatomic, strong) NSString * messageId;   // Use messageId
+@property (nonatomic, strong) NSString * recieptStatus;   // Use recieptStatus
+
 
 
 @property (nonatomic, strong) NSDate * timestamp;

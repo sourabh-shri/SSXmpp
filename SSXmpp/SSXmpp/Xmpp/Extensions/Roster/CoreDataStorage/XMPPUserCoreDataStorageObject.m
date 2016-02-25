@@ -210,7 +210,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
 	newUser.nickname = nil;
 	
 	newUser.displayName = [jid bare];
-	
+    
 	return newUser;
 }
 

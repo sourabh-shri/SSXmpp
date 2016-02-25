@@ -16,3 +16,7 @@ typedef void (^SSAddFriendsblock)(NSDictionary* result);
 typedef void (^SSOnOfflineblock)(NSDictionary* result);
 typedef void (^SSChatblock)(NSDictionary* result);
 typedef void (^SSUserVcardblock)(NSDictionary* result);
+
+
+typedef void (^SSRoomFriendblock)(NSDictionary* result);
+typedef void (^SSCreateRoomblock)(NSDictionary* result);

@@ -5,7 +5,6 @@
 #import "XMPPMessageArchiving_Message_CoreDataObject.h"
 #import "XMPPMessageArchiving_Contact_CoreDataObject.h"
 
-
 @interface XMPPMessageArchivingCoreDataStorage : XMPPCoreDataStorage <XMPPMessageArchivingStorage>
 {
 	/* Inherited protected variables from XMPPCoreDataStorage
@@ -47,6 +46,15 @@
 - (XMPPMessageArchiving_Contact_CoreDataObject *)contactWithBareJidStr:(NSString *)contactBareJidStr
                                                       streamBareJidStr:(NSString *)streamBareJidStr
                                                   managedObjectContext:(NSManagedObjectContext *)moc;
+
+
+
+- (XMPPMessageArchiving_Message_CoreDataObject *)getMessageWithMessageId:(XMPPJID *)messageJid
+                                                               streamJid:(XMPPJID *)streamJid
+                                                               messageId:(NSString*)messageid
+                                                    managedObjectContext:(NSManagedObjectContext *)moc;
+
+
 
 /* Inherited from XMPPCoreDataStorage
  * Please see the XMPPCoreDataStorage header file for extensive documentation.

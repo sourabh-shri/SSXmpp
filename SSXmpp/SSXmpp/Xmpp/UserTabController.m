@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     [[self tabBarController] setTitle:@"SS Xmpp"];
     [[[self tabBarController] navigationItem] setHidesBackButton:YES];
-    arrayTable = [[NSArray alloc]initWithObjects:@"All xmpp user",@"Add user",@"User friends",@"User online/offline friends",@"My profile", nil];
+    arrayTable = [[NSArray alloc]initWithObjects:@"All xmpp user",@"Add user",@"User friends",@"User online/offline friends",@"My profile", @"User Groups ",@"Create Group",nil];
 }
 
 #pragma mark - tableview deleget/datasource
@@ -64,6 +64,12 @@
             break;
         case 4:
             [self performSegueWithIdentifier:@"MyProfileViewController" sender:nil];
+            break;
+        case 5:
+            [self performSegueWithIdentifier:@"UserGroupsViewController" sender:nil];
+            break;
+        case 6:
+            [self performSegueWithIdentifier:@"CreateGroupViewController" sender:nil];
             break;
         default:
             break;

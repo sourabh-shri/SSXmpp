@@ -21,9 +21,12 @@
 @dynamic thread;
 @dynamic outgoing;
 @dynamic composing;
-@dynamic paused;
 @dynamic timestamp;
 @dynamic streamBareJidStr;
+
+@dynamic messageId;
+@dynamic recieptStatus;
+@dynamic paused;
 
 #pragma mark Transient message
 

@@ -17,6 +17,7 @@
 @dynamic mostRecentMessageBody;
 @dynamic mostRecentMessageOutgoing;
 @dynamic streamBareJidStr;
+@dynamic unreadcount;
 
 #pragma mark Transient bareJid
 
@@ -57,6 +58,7 @@
 	[self didChangeValueForKey:@"bareJid"];
 	[self didChangeValueForKey:@"bareJidStr"];
 }
+
 
 - (void)setBareJidStr:(NSString *)bareJidStr
 {

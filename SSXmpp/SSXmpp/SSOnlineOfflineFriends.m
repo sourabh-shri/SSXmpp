@@ -75,7 +75,6 @@
     for ( XMPPUserCoreDataStorageObject *user in [[SSOnlineOfflineFriends shareInstance].fetchedResultsController fetchedObjects])
     {
         
-        
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
 
         [dic setValue:user.jid forKey:@"jid"];
@@ -115,7 +114,8 @@
         {
             [dic setValue:[dicLastMessage valueForKey:@"mostRecentMessageTimestamp"] forKey:@"mostRecentMessageTimestamp"];
             [dic setValue:[dicLastMessage valueForKey:@"mostRecentMessageBody"] forKey:@"mostRecentMessageBody"];
-             [dic setValue:[dicLastMessage valueForKey:@"mostRecentMessageOutgoing"] forKey:@"mostRecentMessageOutgoing"];
+            [dic setValue:[dicLastMessage valueForKey:@"mostRecentMessageOutgoing"] forKey:@"mostRecentMessageOutgoing"];
+            [dic setValue:[dicLastMessage valueForKey:@"unreadcount"] forKey:@"unreadcount"];
             
         }
         else
@@ -123,6 +123,7 @@
             [dic setValue:@"" forKey:@"mostRecentMessageTimestamp"];
             [dic setValue:@"" forKey:@"mostRecentMessageBody"];
             [dic setValue:@"" forKey:@"mostRecentMessageOutgoing"];
+            [dic setValue:@"0" forKey:@"unreadcount"];
         }
         
         [arrayOfData addObject:dic];
@@ -157,16 +158,30 @@
     {
         if(messages.mostRecentMessageBody!=nil)
         {
+            NSString *unreadmessage;
+            
+            if(messages.unreadcount == [NSNull null])
+            {
+                unreadmessage =@"0";
+            }
+            else
+            {
+                unreadmessage = [NSString stringWithFormat:@"%d",messages.unreadcount];
+            }
+            
             NSDictionary *dic = @{
                                   @"bareJidStr":messages.bareJidStr,
                                   @"mostRecentMessageTimestamp":messages.mostRecentMessageTimestamp,
                                   @"mostRecentMessageBody":messages.mostRecentMessageBody,
                                   @"mostRecentMessageOutgoing":messages.mostRecentMessageOutgoing,
-                                  @"streamBareJidStr":messages.streamBareJidStr};
+                                  @"streamBareJidStr":messages.streamBareJidStr,
+                                  @"unreadcount":unreadmessage,
+                                  };
             
             [dicData setObject:dic forKey:[dic valueForKey:@"bareJidStr"]];
+            
+            NSLog(@"%@",dicData);
         }
-        
     }
     return dicData;
 }
@@ -174,6 +189,17 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self fetchedResultsControllerOnlineOfflineFriends];
+}
+
+- (void)joinMultiUserChatRoom:(NSString *)newRoomName
+{
+    XMPPJID *roomJID = [XMPPJID jidWithString:newRoomName];
+    XMPPRoom *newXmppRoom = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomCoreDataStorage sharedInstance] jid:roomJID dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+    [newXmppRoom addDelegate: self  delegateQueue:dispatch_get_main_queue()];
+    [newXmppRoom activate:[SSConnectionClasses shareInstance].xmppStream];
+    [newXmppRoom joinRoomUsingNickname:[SSConnectionClasses shareInstance].xmppStream.myJID.user
+                               history:nil
+                             password:nil];
 }
 
 @end

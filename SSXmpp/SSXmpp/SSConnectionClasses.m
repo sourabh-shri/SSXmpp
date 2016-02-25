@@ -21,6 +21,9 @@
 @synthesize xmppCapabilities;
 @synthesize xmppCapabilitiesStorage;
 @synthesize xmppMessageDeliveryRecipts;
+@synthesize xmppMessageArchivingModule;
+@synthesize xmppRoomMemoryStorage;
+@synthesize xmppMUC;
 
 +(SSConnectionClasses *)shareInstance
 {
@@ -137,9 +140,16 @@
     // It can also be shared amongst multiple streams to further reduce hash lookups.
     xmppMessageArchivingModule = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:[XMPPMessageArchivingCoreDataStorage sharedInstance]];
     [xmppMessageArchivingModule setClientSideMessageArchivingOnly:YES];
+        
+    xmppRoomMemoryStorage  = [[XMPPRoomMemoryStorage alloc]init];
+        
+        //For group invitation
+    xmppMUC = [[XMPPMUC alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+    [xmppMUC addDelegate:self delegateQueue:dispatch_get_main_queue()];
+   
     xmppCapabilitiesStorage = [XMPPCapabilitiesCoreDataStorage sharedInstance];
     xmppCapabilities = [[XMPPCapabilities alloc] initWithCapabilitiesStorage:xmppCapabilitiesStorage];
-    
+        
     xmppLastActivity = [[XMPPLastActivity alloc] initWithDispatchQueue:dispatch_get_main_queue()];
     
     xmppCapabilities.autoFetchHashedCapabilities = YES;
@@ -151,15 +161,17 @@
     xmppMessageDeliveryRecipts.autoSendMessageDeliveryRequests = YES;
         
     // Activate xmpp modules
-    [xmppMessageDeliveryRecipts activate:xmppStream];
+    
     [xmppLastActivity           activate:xmppStream];
     [xmppReconnect              activate:xmppStream];
     [xmppRoster                 activate:xmppStream];
     [xmppvCardTempModule        activate:xmppStream];
     [xmppvCardAvatarModule      activate:xmppStream];
     [xmppCapabilities           activate:xmppStream];
+    [xmppMessageDeliveryRecipts activate:xmppStream];
     [xmppMessageArchivingModule activate:xmppStream];
-    
+    [xmppMUC                    activate:xmppStream];
+
         
     // Add ourself as a delegate to anything we may be interested in
 //    [xmppMessageArchivingModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -276,6 +288,21 @@
 {
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
     [[self xmppStream] sendElement:presence];
+}
+
+#pragma mark - AcceptInvitation
+
+- (void)xmppMUC:(XMPPMUC *)sender roomJID:(XMPPJID *)roomJID didReceiveInvitation:(XMPPMessage *)message
+{
+    XMPPRoom *newXmppRoom = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomCoreDataStorage sharedInstance] jid:[message from] dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+    
+    [newXmppRoom addDelegate: self  delegateQueue:dispatch_get_main_queue()];
+    [newXmppRoom activate:[SSConnectionClasses shareInstance].xmppStream];
+    [newXmppRoom joinRoomUsingNickname:[SSConnectionClasses shareInstance].xmppStream.myJID.user
+                               history:nil
+                              password:nil];
+    
+    //[newXmppRoom sendMessageWithBody:@"hiii"];
 }
 
 @end

@@ -15,12 +15,13 @@
 @interface SSOnlineOfflineFriends : NSObject <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) SSOnOfflineblock ssblock;
-@property(nonatomic, assign) id <SSOnlineOfflineFriendsDelegate> delegate;
+@property (nonatomic, assign) id <SSOnlineOfflineFriendsDelegate> delegate;
 @property (nonatomic,strong) NSFetchedResultsController*fetchedResultsController;
 @property (nonatomic,strong) NSFetchedResultsController*fetchedResultsController1;
 
 + (SSOnlineOfflineFriends *)shareInstance;
 - (void)setSSOnlineOfflineFriendsDelegate;
 - (void)fetchedResultsControllerOnlineOfflineFriends;
+- (void)updateReadCount:(NSString*)jid;
 
 @end
