@@ -40,7 +40,6 @@ static NSString *const xmlns_chatstates = @"http://jabber.org/protocol/chatstate
 	return ([self elementForName:@"gone" xmlns:xmlns_chatstates] != nil);
 }
 
-
 - (void)addActiveChatState
 {
 	[self addChild:[NSXMLElement elementWithName:@"active" xmlns:xmlns_chatstates]];

@@ -41,16 +41,15 @@
         
         NSError *error = nil;
         
-        if (![[SSConnectionClasses shareInstance].xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
-        {
-            NSLog(@"%@",error);
-        }
+//        if (![[SSConnectionClasses shareInstance].xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+//        {
+//            NSLog(@"%@",error);
+//        }
         
         [[SSConnectionClasses shareInstance].xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
         [[SSConnectionClasses shareInstance].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [[SSConnectionClasses shareInstance].xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
-
 }
 
 #pragma mark XMPPStream Delegate

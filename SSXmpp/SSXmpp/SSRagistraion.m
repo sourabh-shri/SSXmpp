@@ -80,6 +80,7 @@
 {
     if (_ssblock)
     {
+        [[SSConnectionClasses shareInstance].xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
         _ssblock(SSResponce(kUserRagistered,kSuccess,@""));
     }
 }
@@ -93,6 +94,7 @@
     {
         if (_ssblock)
         {
+            [[SSConnectionClasses shareInstance].xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
             _ssblock(SSResponce(kUserExist,kFailed,@""));
         }
     }
@@ -100,6 +102,7 @@
     {
         if (_ssblock)
         {
+            [[SSConnectionClasses shareInstance].xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
             _ssblock(SSResponce(kServiceError,kFailed,@""));
         }
     }
@@ -107,6 +110,7 @@
     {
         if (_ssblock)
         {
+            [[SSConnectionClasses shareInstance].xmppStream removeDelegate:self delegateQueue:dispatch_get_main_queue()];
             _ssblock(SSResponce(@"didNotRegister",kFailed,@""));
         }
     }

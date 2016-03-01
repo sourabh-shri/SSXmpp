@@ -6,15 +6,14 @@
 //  Copyright (c) 2015 Sourabh. All rights reserved.
 //
 
-#define HostName @""
-//#define HostName @""
+#define HostName @"your Ip"
 
 #define HostPort 5222
 
 #define UserJid                             @"UserJid"
 
-#define Userpostfix                         @"ssxmpp@canopus-pc"
-#define Grouppostfix                        @"@ssxmpp.canopus-pc"
+#define Userpostfix                         @"ssxmpp@zetrixweb.p1.im"
+#define Grouppostfix                        @"@ssxmpp.zetrixweb.p1.im"
 #define UserPassword                        @"123@ssxmpp"
 
 #define kStatus                             @"status"
